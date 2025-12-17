@@ -6,7 +6,7 @@ require 'net/http'
 require 'uri'
 
 BASE_URL   = 'https://a.windbornesystems.com/treasure'.freeze
-OUTPUT_DIR = File.join(__dir__)  #current folder (balloon-data)
+OUTPUT_DIR = File.join(__dir__,'raw-jsons')  #current folder (balloon-data)
 
 FileUtils.mkdir_p(OUTPUT_DIR)
 
