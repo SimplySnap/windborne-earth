@@ -5,3 +5,36 @@ target
 scratch
 private
 *.iml
+
+
+
+# --------- Ruby backend gitignore -----------
+# Ignore bundler config.
+/backend/.bundle
+
+# Ignore all environment files (except templates).
+/backend/.env*
+!/backend/.env*.erb
+
+# Ignore all logfiles and tempfiles.
+/backend/log/*
+/backend/tmp/*
+!/backend/log/.keep
+!/backend/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+/backend/tmp/pids/*
+!/backend/tmp/pids/
+!/backend/tmp/pids/.keep
+
+# Ignore storage (uploaded files in development and any SQLite databases).
+/backend/storage/*
+!/backend/storage/.keep
+/backend/tmp/storage/*
+!/backend/tmp/storage/
+!/backend/tmp/storage/.keep
+
+/backend/public/assets
+
+# Ignore master key for decrypting credentials and more.
+/backend/config/master.key
