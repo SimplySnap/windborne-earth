@@ -200,6 +200,27 @@ body {
 }
 
 /**************************************************************************************************
+* windborne additions
+**************************************************************************************************/
+#balloon-details {
+  font-family: inherit;
+  font-size: 13px;
+  display: none;              /* hidden until toggled */
+}
+#balloon-details input {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+#balloon-toggle {
+  transition: all 0.2s;
+}
+#balloon-toggle:hover {
+  background: white !important;
+  transform: scale(1.05);
+}
+
+
+/**************************************************************************************************
  * SVG Element Styling
  **************************************************************************************************/
 

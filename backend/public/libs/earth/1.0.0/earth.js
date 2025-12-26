@@ -76,9 +76,14 @@
         µ.buildConfiguration(globes, products.overlayTypes);  // holds the page's current configuration settings
     var inputController = buildInputController();             // interprets drag/zoom operations
     var meshAgent = newAgent();      // map data for the earth
-    var globeAgent = newAgent();     // the model of the globe
+    var globeAgent = newAgent(); // the model of the globe
+
+    // expose globeAgent and current globe projection for overlays
+    
     var gridAgent = newAgent();      // the grid of weather data
     var rendererAgent = newAgent();  // the globe SVG renderer
+    // expose rendererAgent so overlays can subscribe to render events
+    window.rendererAgent = rendererAgent;
     var fieldAgent = newAgent();     // the interpolated wind vector field
     var animatorAgent = newAgent();  // the wind animator
     var overlayAgent = newAgent();   // color overlay over the animation
@@ -278,9 +283,22 @@
     }
 
     function buildRenderer(mesh, globe) {
-        if (!mesh || !globe) return null;
-
-        report.status("Rendering Globe...");
+        console.log('buildRenderer ENTRY - mesh:', !!mesh, 'globe:', !!globe, 'globe:', globe);
+        
+        // GUARD: Skip if no globe (race condition)
+        if (!globe) {
+            console.log('buildRenderer SKIPPING - no globe yet');
+            return when.resolve();  // Return resolved promise to unblock agent
+        }
+        
+        console.log('buildRenderer PROCEEDING with globe.projection:', globe.projection?.type);
+        
+        // Expose globe
+        window.currentGlobe = globe;
+        console.log('currentGlobe SET:', !!window.currentGlobe, window.currentGlobe?.projection?.type);
+        
+        report.status('Rendering Globe...');
+        // ... rest of original function unchanged
         log.time("rendering map");
 
         // UNDONE: better way to do the following?
@@ -967,11 +985,24 @@
         });
 
         function startRendering() {
+            console.log("startRendering called",
+              "mesh:", !!meshAgent.value(),
+              "globe:", !!globeAgent.value());
             rendererAgent.submit(buildRenderer, meshAgent.value(), globeAgent.value());
         }
         rendererAgent.listenTo(meshAgent, "update", startRendering);
+        console.log("Listening to meshAgent update");
         rendererAgent.listenTo(globeAgent, "update", startRendering);
+        console.log("Listening to globeAgent update");
+        // expose agents and current globe projection for overlays (balloons.js)
+        window.globeAgent    = globeAgent;
+        window.rendererAgent = rendererAgent;
+        window.fieldAgent = fieldAgent; 
 
+        //Addition
+        startRendering();
+
+    
         function startInterpolation() {
             fieldAgent.submit(interpolateField, globeAgent.value(), gridAgent.value());
         }

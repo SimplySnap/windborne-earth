@@ -152,5 +152,39 @@
     <script src="/libs/earth/1.0.0/products.js" charset="utf-8"></script>
     <script src="/libs/earth/1.0.0/earth.js" charset="utf-8"></script>
 
+    <!-- Projection state wiring -->
+    <!--<script src="/libs/projection_state.js" charset="utf-8"></script>-->
+
+    <!-- Balloons plotting script-->
+    <script src="/libs/balloons.js"></script>
+    <!-- Balloon Controls (BOTTOM RIGHT - doesn't overlap Earth menu) -->
+<div id="balloon-toggle"
+     style="position:absolute; bottom:20px; right:20px;
+            background:rgba(255,255,255,0.9); color:#333;
+            padding:8px 12px; border-radius:20px;
+            cursor:pointer; font-family:sans-serif; font-weight:bold;
+            box-shadow:0 2px 10px rgba(0,0,0,0.3); font-size:13px; z-index:1000;">
+  Balloons
+</div>
+
+<div id="balloon-details"
+     style="position:absolute; bottom:60px; right:20px;
+            background:rgba(0,0,0,0.8); color:white;
+            padding:12px; border-radius:4px;
+            font-family:sans-serif; font-size:13px;
+            min-width:140px; z-index:1000;">
+  <div style="display:flex; align-items:center; margin-bottom:8px;">
+    <span style="font-weight:bold; margin-right:8px;">Balloons</span>
+    <label style="margin:0; cursor:pointer; font-size:12px;">
+      <input type="checkbox" id="balloon-dots" checked style="margin-right:4px;">Dots
+    </label>
+  </div>
+  <label style="display:block; cursor:pointer; font-size:12px;">
+    <input type="checkbox" id="show-trajectories" checked style="margin-right:8px;">Trajectories
+  </label>
+</div>
+
+
+
 </body>
 </html>
