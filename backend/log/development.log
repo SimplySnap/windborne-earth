@@ -971,3 +971,63 @@ Download script succeeded
 Completed 200 OK in 20893ms (Views: 137.8ms | Allocations: 240874)
 
 
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2025-12-26 14:01:38 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/balloons" for 127.0.0.1 at 2025-12-26 14:01:38 -0800
+Processing by Api::BalloonsController#index as */*
+Download script succeeded
+Completed 200 OK in 21982ms (Views: 165.6ms | Allocations: 240875)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2025-12-26 14:08:26 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/balloons" for 127.0.0.1 at 2025-12-26 14:08:26 -0800
+Processing by Api::BalloonsController#index as */*
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2025-12-26 14:08:28 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/balloons" for 127.0.0.1 at 2025-12-26 14:08:28 -0800
+Processing by Api::BalloonsController#index as */*
+Download script succeeded
+Completed 200 OK in 20976ms (Views: 177.6ms | Allocations: 287614)
+
+
+Download script succeeded
+Completed 200 OK in 20989ms (Views: 138.7ms | Allocations: 481333)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2025-12-26 14:13:30 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/balloons" for 127.0.0.1 at 2025-12-26 14:13:30 -0800
+Processing by Api::BalloonsController#index as */*
+Download script succeeded
+Completed 200 OK in 21450ms (Views: 132.4ms | Allocations: 240873)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2025-12-26 14:24:22 -0800
+Started GET "/api/balloons" for 127.0.0.1 at 2025-12-26 14:24:22 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Processing by Api::BalloonsController#index as */*
+Download script succeeded
+Completed 200 OK in 20792ms (Views: 152.8ms | Allocations: 253343)
+
+
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2025-12-26 14:32:46 -0800
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/api/balloons" for 127.0.0.1 at 2025-12-26 14:32:47 -0800
+Processing by Api::BalloonsController#index as */*
+Download script succeeded
+Completed 200 OK in 20965ms (Views: 135.3ms | Allocations: 240868)
+
+

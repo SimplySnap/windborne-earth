@@ -50,20 +50,45 @@ function getVisibleBalloons() {
   return balloonData.filter(b => b.id === selectedBalloonId);
 }
 
+function isOrthographic(proj) {
+    return proj.clipAngle && proj.clipAngle() === 90;
+}
+
+function getProjectionType(globe) {
+  // Check if this globe matches the orthographic factory
+  if (globe && globe.newProjection && typeof globe.newProjection === 'function') {
+    try {
+      // Capture the projection constructor used by this globe
+      const proj = globe.newProjection({width: 960, height: 500});
+      if (proj && proj.clipAngle && proj.clipAngle() === 90) {
+        return 'orthographic'; // Matches orthographic() factory [file:80]
+      }
+    } catch (e) {}
+  }
+  return null;
+}
+
 function shouldRenderPoint(projection, lon, lat) {
-  // Existing finite check
   const pt = projection([lon, lat]);
   if (!pt || !isFinite(pt[0]) || !isFinite(pt[1])) return false;
   
-  // ORTHOGRAPHIC CULLING ONLY
-  if (projection === d3.geoOrthographic()) {
-    const lambda = d3.geoOrthographic().rotate()[0] * Math.PI / 180;
-    const phi = d3.geoOrthographic().rotate()[1] * Math.PI / 180;
-    const pointRad = d3.geoDistance([lambda, phi], [lon * Math.PI / 180, lat * Math.PI / 180]);
-    return pointRad < Math.PI / 2; // Only front hemisphere
+  const globe = window.currentGlobe;
+  const projType = getProjectionType(globe);
+  
+  if (projType === 'orthographic') {
+    // Proper orthographic culling using rotation
+    try {
+      const rotate = projection.rotate();
+      if (Array.isArray(rotate) && rotate.length >= 2) {
+        const lambda = (rotate[0] || 0) * Math.PI / 180;
+        const phi = (rotate[1] || 0) * Math.PI / 180;
+        const pointRad = d3.geoDistance([lambda, phi], [lon * Math.PI / 180, lat * Math.PI / 180]);
+        return pointRad < Math.PI / 2; // Front hemisphere only
+      }
+    } catch (e) {}
   }
   
-  return true; // Other projections: show everything
+  return true;
 }
 
 function renderBalloonDotsSVG() {
@@ -81,7 +106,15 @@ function renderBalloonDotsSVG() {
   const svg = d3.select('#foreground');
   
   getVisibleBalloons().forEach(balloon => {
-    const last = balloon.points[balloon.points.length - 1];
+    const last = balloon.points[0];
+
+    //Culling for orthographic projection
+    // NEW: Orthographic culling
+    if (isOrthographic(projection)) {
+        const rotate = projection.rotate();
+        const center = [-rotate[0], -rotate[1]];
+        if (d3.geo.distance(center, [last.lon, last.lat]) > Math.PI / 2) return;
+    }
     
     if (!shouldRenderPoint(projection, last.lon, last.lat)) return; // ← KEY FIX
     const lastXY = projection([last.lon, last.lat]);
@@ -127,7 +160,15 @@ function renderBalloonTrajectoriesSVG() {
 
   getVisibleBalloons().forEach(balloon => {
     const projectedPoints = [];
-    balloon.points.forEach(point => {
+    balloon.points.slice().reverse().forEach(point => {  // now → past (fixes visual)
+
+      // NEW: Orthographic culling
+      if (isOrthographic(projection)) {
+          const rotate = projection.rotate();
+          const center = [-rotate[0], -rotate[1]];
+          if (d3.geo.distance(center, [point.lon, point.lat]) > Math.PI / 2) return;
+      }
+
       const pt = projection([point.lon, point.lat]);
       if (!pt || !isFinite(pt[0]) || !isFinite(pt[1])) return;
       const x = pt[0], y = pt[1];
@@ -151,29 +192,6 @@ function renderBalloonTrajectoriesSVG() {
        .style('stroke-linejoin', 'round')
        .style('pointer-events', 'none');
   });
-}
-
-function shouldRenderPoint(projection, lon, lat) {
-  // Existing finite check
-  const pt = projection([lon, lat]);
-  if (!pt || !isFinite(pt[0]) || !isFinite(pt[1])) return false;
-  
-  // ORTHOGRAPHIC CULLING - detect by rotate() behavior
-  try {
-    const rotate = projection.rotate();
-    // Orthographic projections return [lon, lat, 0] from rotate()
-    if (Array.isArray(rotate) && rotate.length >= 2) {
-      const lambda = (rotate[0] || 0) * Math.PI / 180;
-      const phi = (rotate[1] || 0) * Math.PI / 180;
-      
-      const pointRad = d3.geoDistance([lambda, phi], [lon * Math.PI / 180, lat * Math.PI / 180]);
-      return pointRad < Math.PI / 2; // Front hemisphere only
-    }
-  } catch (e) {
-    // Not orthographic or error - show point
-  }
-  
-  return true; // Other projections: show everything
 }
 
 function processBalloonData(rawRecords) {
