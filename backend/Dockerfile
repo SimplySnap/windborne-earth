@@ -33,8 +33,8 @@ RUN curl -L https://github.com/jsocol/grib2json/releases/latest/download/grib2js
 # Copy app code
 COPY . .
 
-# Precompile bootsnap (NOW app code exists)
-RUN bundle exec bootsnap precompile app/ lib/
+# Precompile bootsnap (optional - ignore failures)
+bundle exec bootsnap precompile app/ lib/ || true
 
 # Precompile assets
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
