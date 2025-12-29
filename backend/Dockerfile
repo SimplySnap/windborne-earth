@@ -21,11 +21,31 @@ FROM base as build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git pkg-config
 
-# Install application gems
-COPY Gemfile Gemfile.lock ./
+# Install grib2json for weather data
+# Install packages needed to build gems + GRIB tools
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    build-essential \
+    git \
+    pkg-config \
+    curl \
+    grib-api \
+    libgrib-api-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install application gems - BROKEN
+#COPY Gemfile Gemfile.lock ./
+#RUN bundle install && \
+#    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+#    bundle exec bootsnap precompile --gemfile
+
+# REPLACEMENT Line
 RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
+
+# Installing grib2json binary
+RUN curl -L https://github.com/jsocol/grib2json/releases/latest/download/grib2json-linux64 -o /usr/local/bin/grib2json && \
+    chmod +x /usr/local/bin/grib2json
 
 # Copy application code
 COPY . .
@@ -55,7 +75,8 @@ RUN useradd rails --create-home --shell /bin/bash && \
 USER rails:rails
 
 # Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+#ENTRYPOINT ["/rails/bin/docker-entrypoint"] - removed
+CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000

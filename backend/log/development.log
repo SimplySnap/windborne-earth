@@ -1031,3 +1031,49 @@ Download script succeeded
 Completed 200 OK in 20965ms (Views: 135.3ms | Allocations: 240868)
 
 
+Started GET "/api/balloons" for 127.0.0.1 at 2025-12-29 12:27:33 +0000
+Processing by Api::BalloonsController#index as */*
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2025-12-29 12:27:46 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Download script succeeded
+Completed 200 OK in 23723ms (Views: 373.3ms | Allocations: 297011)
+
+
+Started GET "/data/weather/current/current-relative_humidity-surface-level-gfs-1.0.json" for 127.0.0.1 at 2025-12-29 12:41:17 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/data/weather/current/current-relative_humidity-surface-level-gfs-1.0.json"):
+  
+Started GET "/data/weather/current/current-temp-surface-level-gfs-1.0.json" for 127.0.0.1 at 2025-12-29 12:44:09 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/data/weather/current/current-temp-surface-level-gfs-1.0.json"):
+  
+Started GET "/data/weather/current/current-relative_humidity-surface-level-gfs-1.0.json" for 127.0.0.1 at 2025-12-29 12:44:12 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/data/weather/current/current-relative_humidity-surface-level-gfs-1.0.json"):
+  
+Started GET "/data/weather/current/current-wind-isobaric-850hPa-gfs-1.0.json" for 127.0.0.1 at 2025-12-29 12:44:19 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/data/weather/current/current-wind-isobaric-850hPa-gfs-1.0.json"):
+  
+Started GET "/.well-known/appspecific/com.chrome.devtools.json" for 127.0.0.1 at 2025-12-29 12:44:28 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/.well-known/appspecific/com.chrome.devtools.json"):
+  
+Started GET "/data/weather/current/current-wind-isobaric-500hPa-gfs-1.0.json" for 127.0.0.1 at 2025-12-29 12:44:42 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/data/weather/current/current-wind-isobaric-500hPa-gfs-1.0.json"):
+  
+Started GET "/data/weather/current/current-wind-isobaric-500hPa-gfs-1.0.json" for 127.0.0.1 at 2025-12-29 12:45:05 +0000
+Started GET "/data/weather/current/current-temp-isobaric-500hPa-gfs-1.0.json" for 127.0.0.1 at 2025-12-29 12:45:05 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/data/weather/current/current-wind-isobaric-500hPa-gfs-1.0.json"):
+  
+  
+ActionController::RoutingError (No route matches [GET] "/data/weather/current/current-temp-isobaric-500hPa-gfs-1.0.json"):
+  
+Started GET "/data/weather/current/current-wind-isobaric-500hPa-gfs-1.0.json" for 127.0.0.1 at 2025-12-29 12:45:53 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/data/weather/current/current-wind-isobaric-500hPa-gfs-1.0.json"):
+  
