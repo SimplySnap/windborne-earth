@@ -7,7 +7,7 @@ require 'uri'
 BASE_URL = 'https://a.windbornesystems.com/treasure'.freeze
 
 # Assume this file is at backend/lib/fetch_balloon_data.rb
-ROOT       = File.expand_path('..', __dir__)  # => backend/ (Rails.root)
+ROOT       = File.expand_path(__dir__)  # => backend/ (Rails.root)
 OUTPUT_DIR = File.join(ROOT, 'tmp', 'balloon-data', 'raw-jsons')
 
 FileUtils.mkdir_p(OUTPUT_DIR)
