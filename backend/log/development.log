@@ -1089,3 +1089,6 @@ Completed 200 OK in 211ms (Views: 150.5ms | Allocations: 230470)
 
 Started GET "/api/balloons" for ::1 at 2026-01-03 19:35:02 -0800
 Processing by Api::BalloonsController#index as HTML
+Completed 200 OK in 171ms (Views: 125.8ms | Allocations: 230404)
+
+

@@ -6,8 +6,9 @@ require 'uri'
 
 BASE_URL = 'https://a.windbornesystems.com/treasure'.freeze
 
-# On Render, /tmp is the writable area
-OUTPUT_DIR = File.join('/tmp', 'balloon-data', 'raw-jsons')
+# On Render, /tmp is the writable area - scratch that, new tmp 
+OUTPUT_DIR = '/rails/tmp/balloon-data/raw-jsons'
+
 
 FileUtils.mkdir_p(OUTPUT_DIR)
 
