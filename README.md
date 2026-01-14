@@ -1,5 +1,16 @@
-earth
+windborne-earth
 =====
+"windborne-earth" is a project that combines "earth" (found at http://earth.nullschool.net) with live balloon data from Windborne Systems' live balloon telemetry. This data is taken from measurements over the last 24 hours, and 
+We use a rails server to load the earth javascript, and process balloon data to be overlayed on top.
+
+To get setup, first clone the directory. Then:
+
+    cd backend
+    rails s
+
+Then, enter localhost:3000 in the browser to see your local web server.
+
+
 
 **NOTE: the location of `dev-server.js` has changed from `{repository}/server/` to `{repository}/`**
 
