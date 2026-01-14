@@ -10,9 +10,22 @@ To get setup, first clone the directory. Then:
 
 Then, enter localhost:3000 in the browser to see your local web server.
 
+The biggest challenge of this project was getting the balloons to 'project' properly onto the earth's projection type. This also taught me a lot about ruby on rails and javascript web dev.
+
+## Project Images
+
+Here are some images from the project:
+
+![Pic 1](pics/sc1.png)
+
+![Pic 2](pics/sc2.png)
+
+![Pic 3](pics/sc3.png)
+
+![Gif](pics/gif1.gif)
 
 
-**NOTE: the location of `dev-server.js` has changed from `{repository}/server/` to `{repository}/`**
+Below: "earth"'s original readme
 
 "earth" is a project to visualize global weather conditions.
 
@@ -21,30 +34,6 @@ A customized instance of "earth" is available at http://earth.nullschool.net.
 "earth" is a personal project I've used to learn javascript and browser programming, and is based on the earlier
 [Tokyo Wind Map](https://github.com/cambecc/air) project.  Feedback and contributions are welcome! ...especially
 those that clarify accepted best practices.
-
-building and launching
-----------------------
-
-After installing node.js and npm, clone "earth" and install dependencies:
-
-    git clone https://github.com/cambecc/earth
-    cd earth
-    npm install
-
-Next, launch the development web server:
-
-    node dev-server.js 8080
-
-Finally, point your browser to:
-
-    http://localhost:8080
-
-The server acts as a stand-in for static S3 bucket hosting and so contains almost no server-side logic. It
-serves all files located in the `earth/public` directory. See `public/index.html` and `public/libs/earth/*.js`
-for the main entry points. Data files are located in the `public/data` directory, and there is one sample
-weather layer located at `data/weather/current`.
-
-*For Ubuntu, Mint, and elementary OS, use `nodejs` instead of `node` instead due to a [naming conflict](https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#ubuntu-mint-elementary-os).
 
 getting map data
 ----------------
