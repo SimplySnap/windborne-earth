@@ -1077,3 +1077,15 @@ Started GET "/data/weather/current/current-wind-isobaric-500hPa-gfs-1.0.json" fo
   
 ActionController::RoutingError (No route matches [GET] "/data/weather/current/current-wind-isobaric-500hPa-gfs-1.0.json"):
   
+Started GET "/api/balloons" for ::1 at 2026-01-14 14:43:33 -0800
+Processing by Api::BalloonsController#index as */*
+Download script succeeded
+Completed 200 OK in 6079ms (Views: 146.1ms | Allocations: 240852)
+
+
+Started GET "/api/balloons" for ::1 at 2026-01-14 14:48:02 -0800
+Processing by Api::BalloonsController#index as */*
+Download script succeeded
+Completed 200 OK in 7744ms (Views: 146.1ms | Allocations: 240852)
+
+
