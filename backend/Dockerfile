@@ -36,9 +36,6 @@ COPY . .
 # Precompile bootsnap (optional - ignore failures)
 RUN bundle exec bootsnap precompile app/ lib/ || true
 
-# Permissions
-RUN chmod +x bin/rails bin/rake bin/docker-entrypoint 2>/dev/null || true
-
 # Precompile assets
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
